@@ -6,9 +6,7 @@
 #include <dirent.h>
 #include <unistd.h>
 
-#define PATH "/home/goliveira/test"
 #define VALID_OPTS "rdlbc"
-
 
 int walk_dir(const char *path, char type)
 {
@@ -66,10 +64,17 @@ int main(int argc, char **argv){
 
     opt = getopt(argc,argv,VALID_OPTS);
     if(opt == -1){
+        if(argc == 1)
+        ret = walk_dir(".",'r');
+        else
         ret = walk_dir(argv[1],'r');
     }else{
-        ret = walk_dir(argv[2],opt);
+        if(argc == 2)
+        ret = walk_dir(".",opt);
+        else
+        ret = walk_dir(argv[1],opt);
     }
+
 
     printf("%d\n",ret);
     return 0;
