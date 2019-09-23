@@ -39,7 +39,7 @@ int walk_dir(const char *path, char type)
         strcpy(p, dp->d_name);
 
         struct stat filestat;
-        stat(full_path,&filestat);
+        lstat(full_path,&filestat);
 
         if(type=='r' && S_ISREG(filestat.st_mode) ||
            type=='d' && S_ISDIR(filestat.st_mode) ||
@@ -72,7 +72,7 @@ int main(int argc, char **argv){
         if(argc == 2)
         ret = walk_dir(".",opt);
         else
-        ret = walk_dir(argv[1],opt);
+        ret = walk_dir(argv[2],opt);
     }
 
 
