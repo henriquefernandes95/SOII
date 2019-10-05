@@ -5,11 +5,14 @@
 
 int child(int sec){
     char dir[256];
-
-    while(1){
+    char *ps="/bin/ps";
+    char *log="> log.txt";
+    printf("passou");
+    while(true){
         getcwd(dir,sizeof(dir));
         //puts(dir);
-        execl("/bin/ps","> log.txt");
+        execl(ps,log);
+        printf("%d",sec);
         sleep(sec*1000);
         
     }
@@ -21,6 +24,7 @@ int main(int argc, char *argv[]){
     
 
     if(fork()==0){
+        printf("%d",atoi(argv[1]));
         child(atoi(argv[1]));
     }
 
