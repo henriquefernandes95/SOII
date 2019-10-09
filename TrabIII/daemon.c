@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
     while(1){
         signal(SIGTERM,handler);
         
-        //carq=popen(strcat(dir,"/log.txt"),"w");//alternativa cria um child com pipe atrelado
+        
         system("ps aux \\ 
         | awk \'{ print $2 \" \" $8 \" \" $11 }\' \\
         | grep -w Z \
