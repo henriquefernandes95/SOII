@@ -9,7 +9,7 @@
 
 
 int main(int argc, char *argv[]){
-    int child, cstatus, filed,fsize;
+    int child;
     
     char dir[256];//diretorio de trabalho
 
@@ -21,19 +21,17 @@ int main(int argc, char *argv[]){
         printf("Esse programa inicia um daemon que irá executar em intervalos de segundos, de acordo com a entrada\n");
         printf("Use a chamada przombies n. Sendo n o intervalo em segundos\n");
     }
-    if(atoi(argv[1])<0){
-        printf("Erro");
-    }
-    else{
-        printf("Entrada %s inválida. Ente com -help\n",argv[1]);
-    }
-    getcwd(dir,sizeof(dir));//obtém o local para criar o arquivo
+    
+    getcwd(dir,sizeof(dir));//obtém o local para carregar o daemon
     child=fork();//cria o daemon
-    if(!child){//cria o daemon
-        execlp(strcat(dir,"/daemon"),strcat(dir,"/daemon"),argv[1],(char*)0);
-            
+    
+    if(!child){
+        kill(getppid(),SIGTERM);
+        execlp(strcat(dir,"/daemon"),"./daemon",argv[1],(char*)0);
+        
     }
     else{//o pai executa
+        
         return 0;
             
     }
