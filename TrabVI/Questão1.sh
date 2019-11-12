@@ -1,4 +1,4 @@
-#bin.sh
+#!/bin/bash
 echo Deseja o horário? s ou n
 read x
 if [ $x = 's' ] 
